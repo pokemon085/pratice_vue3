@@ -37,6 +37,7 @@ export default defineComponent({
       lastName: "bbb",
     });
 
+    //下面更改字 上面不會更著改
     const fullName1 = computed(() => {
       return user.firstName + "_" + user.lastName;
     });
