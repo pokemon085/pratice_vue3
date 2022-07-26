@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=#a#, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .active {
+      color: red;
+    }
+    .title {
+      font-weight: bold;
+    }
+    .aaa{
+        border: 1px solid #000;
+    }
+  </style>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div :class="className">哈哈</div>
+
+      <!-- 對象語法 {'active':boolean} -->
+      <div :class="{'active':isActive}">哈哈哈</div>
+      <button @click="toggle">toggle</button>
+
+      <!-- 也可以有多個鍵值對 會跟默認的class結合-->
+      <div class="aaa" :class="{'active':isActive,'title':isTitle}">哈哈哈哈</div>
+    
+      <!-- 將對象放到一個單獨的屬性中 -->
+      <div :class="classObj">classObj</div>
+
+
+      <!-- 將對象放到一個方法中 -->
+      <div :class="getClassObj()">classObj methods</div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            className: "why",
+            isActive: true,
+            isTitle: true,
+            classObj:{active:true,title:true}
+          };
+        },
+        methods: {
+          toggle() {
+            this.isActive = !this.isActive;
+            this.isTitle = !this.isTitle;
+          },
+          getClassObj(){
+            return {active:true,title:true}
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>

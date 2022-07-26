@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=#a#, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <template id="my-app">
+        <!-- 綁定事件 -->
+        <button @click="btn1Click">button1</button>
+
+        <!-- 滑鼠移動到按鈕就會觸發 -->
+        <button @mousemove="mouseMove">button2</button>
+
+        <!-- 綁定對象 -->
+        <button class="area" v-on="{click:btn1Click,mousemove:mouseMove}">綁定對象</button>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        const App={
+            template:'#my-app',
+            data(){
+                return{
+                    message:'Hello World'
+                }
+            },
+            methods:{
+                btn1Click(){
+                    console.log('button1 click')
+                },
+                mouseMove(){
+                    console.log("mouse move")
+                }
+            }
+        }
+
+        Vue.createApp(App).mount('#app');
+    </script>
+</body>
+</html>

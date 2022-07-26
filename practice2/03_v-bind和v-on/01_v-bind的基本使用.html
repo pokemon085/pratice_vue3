@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=#a#, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <!-- vue2 template模板中只能有一個根元素 -->
+    <!-- vue3 是允許template中有多個根元素 -->
+    <template id="my-app">
+        <!-- v-bind:指令 -->
+        <img :src="imgUrl" alt="">
+        <a :href="link">百度一下</a>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        const App={
+            template:'#my-app',
+            data(){
+                return{
+                    imgUrl:"https://media.pocketmonsters.net/imageboard/77/16557252430038.png",
+                    link:"https://www.baidu.com"
+                }
+            }
+        }
+
+        Vue.createApp(App).mount('#app');
+    </script>
+</body>
+</html> 
