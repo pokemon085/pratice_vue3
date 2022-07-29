@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=#a#, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <ul>
+        <li v-for="(value,index) in list">{{value}}</li>
+      </ul>
+      <input type="text" v-model="item" />
+      <button @click="add">add</button>
+      <button @click="remove">remove last item</button>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            list: ["aaa", "bbb", "ccc"],
+            item: "",
+          };
+        },
+        methods: {
+          add() {
+            if (this.item != "") {
+              this.list.push(this.item);
+              this.item="";
+
+            //   filter ,concat 會產生新數組
+              //this.list=this.list.filter(value=>value.length>5)
+            }
+          },
+          remove(){
+            this.list.pop();
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>

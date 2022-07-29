@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=#a#, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <template id="my-app">
+        <h2>array</h2>
+        <ul>
+            <li v-for="(item,index) in list">
+                {{index}}.{{item}}
+            </li>
+        </ul>
+
+        <h2>object</h2>
+        <ul>
+            <li v-for="(item,key,index) in info">{{index}} info[{{key}}]={{item}}</li>
+        </ul>
+
+        <h2>number</h2>
+        <ul>
+            <li v-for="(num,index) in 10">{{num}}--{{index}}</li>
+        </ul>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        const App={
+            template:'#my-app',
+            data(){
+                return{
+                   list:[
+                    "aaa",
+                    "bbb",
+                    "ccc",
+                    "ddd"
+                   ],
+                   info:{
+                    name:"why",
+                    age:11,
+                    like:"sleep"
+                   }
+                }
+            }
+        }
+
+        Vue.createApp(App).mount('#app');
+    </script>
+</body>
+</html>
