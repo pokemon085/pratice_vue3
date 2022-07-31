@@ -1,95 +1,38 @@
 <template>
-  <div>
-    <h2>計算屬性與監聽</h2>
-    <fieldset>
-      <legend>姓名操作</legend>
-      姓氏:
-      <input
-        type="text"
-        placeholder="請輸入姓氏"
-        v-model="user.firstName"
-      /><br />
-      名字:
-      <input
-        type="text"
-        placeholder="請輸入名字"
-        v-model="user.lastName"
-      /><br />
-    </fieldset>
-    <fieldset>
-      <legend>計算屬性和監視</legend>
-      姓名:
-      <input type="text" placeholder="顯示姓名" v-model="fullName1" /><br />
-      姓名:
-      <input type="text" placeholder="顯示姓名" v-model="fullName2" /><br />
-      姓名: <input type="text" placeholder="顯示姓名"  v-model="fullName3"  /><br />
-    </fieldset>
-  </div>
+  <h2>app</h2>
+  <h3>msg:{{msg}}</h3>
+  <button @click="msg +='==='" >update data</button>
+  <hr/>
+  <Child :msg="msg" @toolabClick="toolabFun" msg2='4545641'>
+  <!--  vue3 slot -->
+  <template v-slot:aaa>  
+    <span>slot to child</span>
+  </template>
+  </Child>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, computed ,watch,ref,watchEffect} from "vue";
+import { defineComponent ,ref} from 'vue'
+//引入子級組件Child
+import Child from './components/Child.vue'
 export default defineComponent({
-  name: "APP",
+  name:'APP',
 
-  setup() {
-    const user = reactive({
-      firstName: "aaa",
-      lastName: "bbb",
-    });
-
-    //下面更改字 上面不會更著改
-    const fullName1 = computed(() => {
-      return user.firstName + "_" + user.lastName;
-    });
-
-    //下面更改字 上面也會更著改
-    const fullName2 = computed({
-      get() {
-        return user.firstName + "_" + user.lastName;
-      },
-      set(val: string) {
-        console.log("===" + val);
-        const names = val.split("_");
-        if (names) {
-          user.firstName = names[0];
-          user.lastName = names[1];
-        }
-      },
-    });
-
-    const fullName3=ref('')
-    //vue2監聽
-    // watch(user,({firstName,lastName})=>{
-    //     fullName3.value=firstName+'_'+lastName
-    // },{immediate:true,deep:true})
-    //immediate默認會執行一次watch
-
-    //vue3監聽 不需要配置immediate deep 默認就有了
-    watchEffect(()=>{
-      fullName3.value=user.firstName+'_'+user.lastName
-    })
-
-    //vue3監聽2 下面改變 上面也會跟著改變
-    watchEffect(()=>{
-      const names=fullName3.value.split('_')
-      user.firstName=names[0]
-      user.lastName=names[1]
-    })
-
-
-    //watch--可以監視多個數據
-    watch([()=>user.firstName,()=>user.lastName,fullName3],()=>{
-      //user.firstName user.lastName不適響應式數據 fullName3是響應式(v-model)
-      console.log('====')
-    })
-
-
-    return {
-      user,
-      fullName1,
-      fullName2,
-      fullName3
-    };
+  //註冊組件
+  components:{
+    Child
   },
-});
+
+  setup(){
+   
+    const msg=ref('what are you')
+    function toolabFun(key:string){
+      console.log('aaa'+key)
+      msg.value+=key
+    }
+    return{
+      msg,
+      toolabFun
+    }
+  }
+})
 </script>

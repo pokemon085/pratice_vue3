@@ -3,7 +3,12 @@
   <h3>msg:{{msg}}</h3>
   <button @click="msg +='==='" >update data</button>
   <hr/>
-  <Child :msg="msg" @toolabClick="toolabFun" msg2='4545641'/>
+  <Child :msg="msg" @toolabClick="toolabFun" msg2='4545641'>
+  <!--  vue3 slot -->
+  <template v-slot:aaa>  
+    <span>slot to child</span>
+  </template>
+  </Child>
 </template>
 <script lang="ts">
 import { defineComponent ,ref} from 'vue'
